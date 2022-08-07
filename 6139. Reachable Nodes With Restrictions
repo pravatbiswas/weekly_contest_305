@@ -1,0 +1,20 @@
+class Solution:
+    def reachableNodes(self, n: int, edges: List[List[int]], restricted: List[int]) -> int:
+        adj = collections.defaultdict(list)
+        visit = set()
+        stack = [0]
+        for a, b in edges:
+            adj[a].append(b)
+            adj[b].append(a)
+        restricted = set(restricted)
+        while stack:
+            node = stack.pop()
+            if node not in visit and node not in restricted:
+                visit.add(node)
+                temp = list(set(stack + adj[node]))
+                stack = temp
+                
+        return len(visit)
+        
+                
+            
