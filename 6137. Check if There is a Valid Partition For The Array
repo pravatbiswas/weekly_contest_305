@@ -1,1 +1,15 @@
-
+class Solution:
+    def validPartition(self, a: List[int]) -> bool:
+        n = len(a)
+        f = [0 for i in range(n + 1)]
+        f[0] = 1
+        for i in range(n + 1):
+            if i >= 2 and a[i - 1] == a[i - 2]:
+                f[i] |= f[i - 2]
+            if i >= 3 and a[i - 1] == a[i - 2] == a[i - 3]:
+                f[i] |= f[i - 3]
+            if i >= 3 and a[i - 1] == a[i - 2] + 1 == a[i - 3] + 2:
+                f[i] |= f[i - 3]
+        if f[n]:
+            return True
+        return False
